@@ -1,6 +1,8 @@
 body {
+  background-image: url('images/blacholeastro.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
   font-family: sans-serif;
-  background-color: #f0f0f0;
-  text-align: center;
-  margin-top: 100px;
 }
