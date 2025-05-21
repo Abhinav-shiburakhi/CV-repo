@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Personal Webpage</title>
+  <title>Black Hole Interactive Page</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, I'm [Your Name]!</h1>
-  <p>Welcome to my personal webpage. Here you can learn more about me and my interests.</p>
-  
-  <h2>About Me</h2>
-  <p>I am passionate about web development, technology, and learning new things.</p>
-  
-  <h2>My Projects</h2>
-  <ul>
-    <li>Project One</li>
-    <li>Project Two</li>
-    <li>Project Three</li>
-  </ul>
-  
-  <h2>Contact</h2>
-  <p>You can reach me at <a href="mailto:your.email@example.com">abhinavshibu33@gmail.com</a>.</p>
-  
-  <hr>
-  <p>Connect with me on <a href="https://github.com/Abhinav-shiburakhi">GitHub</a>.</p>
+  <div class="container">
+    <h1 id="main-message">Welcome to the Black Hole Explorer!</h1>
+    <button id="explore-btn">Explore the Mystery</button>
+  </div>
+  <script>
+    const btn = document.getElementById('explore-btn');
+    const msg = document.getElementById('main-message');
+    let explored = false;
+
+    btn.addEventListener('click', function() {
+      if (!explored) {
+        msg.textContent = "You've crossed the event horizon! 🌌";
+        btn.textContent = "Go Back";
+        explored = true;
+      } else {
+        msg.textContent = "Welcome to the Black Hole Explorer!";
+        btn.textContent = "Explore the Mystery";
+        explored = false;
+      }
+    });
+  </script>
 </body>
 </html>
