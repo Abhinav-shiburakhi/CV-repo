@@ -1,9 +1,0 @@
-<img id="airship" src="images/spriteship.png" style="
-  position: absolute;
-  left: 25%;
-  top: 25%;
-  width: 60px;
-  z-index: 2;
-  cursor: pointer;
-  transition: left 1s, top 1s;
-">
