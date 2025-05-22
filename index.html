@@ -111,7 +111,7 @@
       width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 100;
-      background: url('images/newbg.jpg') center center / cover no-repeat;
+      background: url('images/aiblackhole.png') center center / cover no-repeat;
       clip-path: circle(0% at 50% 50%);
       transition: clip-path 1s ease, opacity 0.5s 1s;
       opacity: 1;
@@ -128,7 +128,7 @@
     <div class="black-hole"></div>
   </div>
   <!-- Airship sprite (change src path if needed) -->
-  <img id="airship" src="images/spriteship.png" alt="Click to Dive">
+  <img id="airship" src="images/spriteship.png" alt="TAP">
   <!-- Star field -->
   <div class="stars"></div>
   <!-- Circular reveal overlay (hidden by default) -->
@@ -160,7 +160,7 @@
 
         // After the reveal animation, set the body background and hide the overlay
         setTimeout(() => {
-          document.body.style.background = 'url("images/newbg.jpg") center center / cover no-repeat';
+          document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
           transition.style.opacity = '0';
         }, 1000); // 1000ms matches the transition duration
       }, 1000); // matches the CSS transition duration for airship movement
