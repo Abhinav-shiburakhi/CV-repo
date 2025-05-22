@@ -52,16 +52,18 @@
       starsContainer.appendChild(star);
     }
 
-    // Hamburger menu toggle
+    // Hamburger menu toggle (sliding menu)
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
     menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('menu-shown');
       menu.classList.toggle('menu-hidden');
       menuToggle.classList.toggle('open');
     });
     // Optional: Close menu when clicking a link
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
+        menu.classList.remove('menu-shown');
         menu.classList.add('menu-hidden');
         menuToggle.classList.remove('open');
       });
