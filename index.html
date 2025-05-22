@@ -6,14 +6,15 @@
   <title>Interactive Black Hole with Billboard</title>
   <!-- Fancy font for the billboard -->
   <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
   <style>
     .billboard-container {
       position: absolute;
       left: 50%;
-      top: calc(50% - 210px); /* Adjusts billboard above black hole */
+      top: calc(50% - 210px);
       transform: translateX(-50%);
       z-index: 10;
-      pointer-events: none; /* So it doesn't block clicks */
+      pointer-events: none;
       opacity: 1;
       transition: opacity 0.5s;
     }
@@ -49,11 +50,9 @@
       filter: drop-shadow(0 2px 6px #7e57c2);
       margin-top: -2px;
     }
-    /* FIX: Allow pointer events on black hole */
     .black-hole {
       pointer-events: auto;
     }
-    /* ENTER text in the center when rocket vanishes */
     #enter-text {
       position: fixed;
       left: 50%;
@@ -75,9 +74,27 @@
     #enter-text.visible {
       opacity: 1;
     }
+    /* X button for closing menu */
+    #menu-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 2em;
+      color: #ffe082;
+      cursor: pointer;
+      z-index: 2002;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.85;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    #menu-close:hover {
+      color: #ffd54f;
+      opacity: 1;
+    }
   </style>
-  <!-- Oswald authoritative font for ENTER -->
-  <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Menu Sprite Button and Sliding Menu -->
@@ -86,6 +103,7 @@
       <img src="images/menusprite.png" alt="Menu" id="menu-sprite" />
     </button>
     <nav id="menu" class="menu-hidden">
+      <button id="menu-close" aria-label="Close Menu">&times;</button>
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#projects">Projects</a></li>
@@ -149,6 +167,13 @@
         menu.classList.add('menu-hidden');
         menuToggle.classList.remove('open');
       });
+    });
+    // X button to close menu
+    const menuClose = document.getElementById('menu-close');
+    menuClose.addEventListener('click', () => {
+      menu.classList.remove('menu-shown');
+      menu.classList.add('menu-hidden');
+      menuToggle.classList.remove('open');
     });
 
     // --- Black hole transition trigger ---
