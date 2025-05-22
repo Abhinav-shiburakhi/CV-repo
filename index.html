@@ -46,10 +46,12 @@
         transition.classList.add('revealed');
         airship.classList.add('hidden'); // Hide the airship with a fade out
 
-        // After the reveal animation, set the body background and hide the overlay
+        // After the reveal animation, set the body background and hide the overlay and black hole
         setTimeout(() => {
           document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
           transition.style.opacity = '0';
+          // Hide the black hole container
+          document.querySelector('.black-hole-container').classList.add('hidden');
         }, 1000); // 1000ms matches the transition duration
       }, 1000); // matches the CSS transition duration for airship movement
     });
