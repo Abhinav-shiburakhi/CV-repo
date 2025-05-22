@@ -136,7 +136,7 @@
           const widthScale = minWidthScale + scaleFactor * (1 - minWidthScale);
           const heightScale = maxHeightScale - scaleFactor * (maxHeightScale - 1);
           // +180 for right-facing sprite
-          rocket.style.transform = `rotate(${angle+180}deg) scale(${widthScale}, ${heightScale})`;
+          rocket.style.transform = `rotate(${angle+180}deg) scale(${heightScale}, ${widthScale})`;
         } else {
           rocket.style.transform = `rotate(${angle+180}deg) scale(1, 1)`;
         }
