@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Black Hole Interactive Background</title>
+  <title>Interactive Black Hole with Airship</title>
   <style>
     body {
       margin: 0;
@@ -86,13 +86,29 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.2; }
     }
+    /* Airship sprite styling */
+    #airship {
+      position: absolute;
+      left: 25%;
+      top: 25%;
+      width: 60px;
+      z-index: 2;
+      cursor: pointer;
+      transition: left 1s, top 1s;
+      /* Optionally add drop shadow for visibility */
+      filter: drop-shadow(0 0 8px #fff);
+    }
   </style>
 </head>
 <body>
+  <!-- Black hole and aura -->
   <div class="black-hole-container">
     <div class="purple-shadow"></div>
     <div class="black-hole"></div>
   </div>
+  <!-- Airship sprite (change src path if needed) -->
+  <img id="airship" src="/images/spriteship.png" alt="Airship">
+  <!-- Star field -->
   <div class="stars"></div>
   <script>
     // Generate random stars
@@ -105,6 +121,20 @@
       star.style.animationDelay = `${Math.random() * 5}s`;
       starsContainer.appendChild(star);
     }
+
+    // Animate airship and change background on click
+    const airship = document.getElementById('airship');
+    airship.addEventListener('click', () => {
+      // Move airship closer to center
+      airship.style.left = '45%';
+      airship.style.top = '45%';
+
+      // Change background after animation
+      setTimeout(() => {
+        document.body.style.background = 'radial-gradient(circle at center, #222, #000 90%)';
+        // Optionally, you can also change black hole or add more effects here
+      }, 1000); // matches the CSS transition duration
+    });
   </script>
 </body>
 </html>
