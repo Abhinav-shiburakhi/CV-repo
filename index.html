@@ -53,6 +53,26 @@
     .black-hole {
       pointer-events: auto;
     }
+    /* ENTER text in the center when rocket vanishes */
+    #enter-text {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+      font-size: 3em;
+      color: #c0c0c0;
+      text-shadow: 0 0 18px #fff, 0 2px 8px #888;
+      letter-spacing: 0.18em;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transition: opacity 0.3s;
+      user-select: none;
+    }
+    #enter-text.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -78,6 +98,9 @@
       <div class="billboard-arrow"></div>
     </div>
   </div>
+
+  <!-- ENTER text in the center -->
+  <div id="enter-text">ENTER</div>
 
   <!-- Black hole with blue and purple aura -->
   <div class="black-hole-container">
@@ -143,6 +166,7 @@
 
     // --- Rocket Cursor Script with auto-sizing, scaling, and disappearing effect ---
     const rocket = document.getElementById('rocket-cursor');
+    const enterText = document.getElementById('enter-text');
     let rocketWidth = 32; // fallback default, matches CSS max-width
     let rocketHeight = 32;
 
@@ -177,8 +201,10 @@
 
       if (distance < disappearRadius) {
         rocket.style.opacity = '0';
+        enterText.classList.add('visible');
       } else {
         rocket.style.opacity = '1';
+        enterText.classList.remove('visible');
         if (distance < effectRadius) {
           // Stretch and thin the rocket as it approaches the center
           const scaleFactor = 1 - (effectRadius - distance) / effectRadius;
