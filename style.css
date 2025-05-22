@@ -254,3 +254,24 @@ body {
   margin-top: -2px;
   /* Arrow points downward toward black hole */
 }
+
+/* --- ENTER text in the center when rocket vanishes --- */
+#enter-text {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+  font-size: 3em;
+  color: #c0c0c0;
+  text-shadow: 0 0 18px #fff, 0 2px 8px #888;
+  letter-spacing: 0.18em;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: opacity 0.3s;
+  user-select: none;
+}
+#enter-text.visible {
+  opacity: 1;
+}
