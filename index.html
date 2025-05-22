@@ -92,22 +92,54 @@
       }, 1000);
     });
 
-    // --- Rocket Cursor Script ---
+    // --- Rocket Cursor Script with auto-sizing, scaling, and disappearing effect ---
     const rocket = document.getElementById('rocket-cursor');
-    const rocketSize = 48; // Adjust if your sprite is a different size
+    let rocketWidth = 48; // fallback default
+    let rocketHeight = 48;
+
+    // Set actual image size once loaded
+    function updateRocketSize() {
+      rocketWidth = rocket.naturalWidth || 48;
+      rocketHeight = rocket.naturalHeight || 48;
+      rocket.style.width = rocketWidth + 'px';
+      rocket.style.height = rocketHeight + 'px';
+    }
+    rocket.onload = updateRocketSize;
+    if (rocket.complete) updateRocketSize();
+
+    // Effect parameters
+    const effectRadius = 150; // px, where stretching starts
+    const minWidthScale = 0.3;
+    const maxHeightScale = 2.5;
+    const disappearRadius = 20; // px, where rocket disappears
 
     document.addEventListener('mousemove', (e) => {
-      rocket.style.left = (e.clientX - rocketSize / 2) + 'px';
-      rocket.style.top = (e.clientY - rocketSize / 2) + 'px';
+      // Always use current rocketWidth for positioning
+      rocket.style.left = (e.clientX - rocketWidth / 2) + 'px';
+      rocket.style.top = (e.clientY - rocketHeight / 2) + 'px';
 
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
       const dx = centerX - e.clientX;
       const dy = centerY - e.clientY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
       const angle = Math.atan2(dy, dx) * 180 / Math.PI;
 
-      // If your rocket faces left by default, this is correct.
-      rocket.style.transform = `rotate(${angle}deg)`;
+      if (distance < disappearRadius) {
+        rocket.style.opacity = '0';
+      } else {
+        rocket.style.opacity = '1';
+        if (distance < effectRadius) {
+          // Stretch and thin the rocket as it approaches the center
+          const scaleFactor = 1 - (effectRadius - distance) / effectRadius;
+          const widthScale = minWidthScale + scaleFactor * (1 - minWidthScale);
+          const heightScale = maxHeightScale - scaleFactor * (maxHeightScale - 1);
+          rocket.style.transform = `rotate(${angle}deg) scale(${widthScale}, ${heightScale})`;
+        } else {
+          rocket.style.transform = `rotate(${angle}deg) scale(1, 1)`;
+        }
+      }
     });
 
     // Optional: Hide rocket cursor on touch devices
