@@ -135,7 +135,7 @@
           const scaleFactor = 1 - (effectRadius - distance) / effectRadius;
           const widthScale = minWidthScale + scaleFactor * (1 - minWidthScale);
           const heightScale = maxHeightScale - scaleFactor * (maxHeightScale - 1);
-          rocket.style.transform = `rotate(${angle}deg) scale(${widthScale}, ${heightScale})`;
+          rocket.style.transform = `rotate(${angle+180}deg) scale(${widthScale}, ${heightScale})`;
         } else {
           rocket.style.transform = `rotate(${angle}deg) scale(1, 1)`;
         }
