@@ -71,24 +71,19 @@
       });
     });
 
-    // Animate airship and change background on click
-    const airship = document.getElementById('airship');
-    airship.addEventListener('click', () => {
-      airship.style.left = '45%';
-      airship.style.top = '45%';
+    // --- Black hole transition trigger ---
+    const blackHole = document.querySelector('.black-hole');
+    blackHole.addEventListener('click', () => {
+      const transition = document.getElementById('bg-transition');
+      transition.classList.add('revealed');
+      document.querySelector('.black-hole-container').classList.add('hidden');
       setTimeout(() => {
-        const transition = document.getElementById('bg-transition');
-        transition.classList.add('revealed');
-        airship.classList.add('hidden');
-        setTimeout(() => {
-          document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
-          transition.style.opacity = '0';
-          document.querySelector('.black-hole-container').classList.add('hidden');
-          // Stop star twinkling by removing the class
-          document.querySelectorAll('.star').forEach(star => {
-            star.classList.remove('star');
-          });
-        }, 1000);
+        document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
+        transition.style.opacity = '0';
+        // Stop star twinkling by removing the class
+        document.querySelectorAll('.star').forEach(star => {
+          star.classList.remove('star');
+        });
       }, 1000);
     });
 
