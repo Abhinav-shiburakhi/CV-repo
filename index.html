@@ -179,6 +179,7 @@
     // --- Black hole transition trigger ---
     const blackHole = document.querySelector('.black-hole');
     const enterText = document.getElementById('enter-text');
+    const rocket = document.getElementById('rocket-cursor');
     blackHole.addEventListener('click', () => {
       const transition = document.getElementById('bg-transition');
       transition.classList.add('revealed');
@@ -188,6 +189,9 @@
       setTimeout(() => {
         document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
         transition.style.opacity = '0';
+        // Restore default cursor and hide rocket cursor
+        document.body.style.cursor = "auto";
+        rocket.style.display = "none";
         // Stop star twinkling by removing the class
         document.querySelectorAll('.star').forEach(star => {
           star.classList.remove('star');
@@ -196,7 +200,6 @@
     });
 
     // --- Rocket Cursor Script with auto-sizing, scaling, and disappearing effect ---
-    const rocket = document.getElementById('rocket-cursor');
     let rocketWidth = 32; // fallback default, matches CSS max-width
     let rocketHeight = 32;
 
