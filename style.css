@@ -215,6 +215,13 @@ body {
   transform: translateX(-50%);
   z-index: 10;
   pointer-events: none; /* So it doesn't block clicks */
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.billboard-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
 }
 
 .billboard {
