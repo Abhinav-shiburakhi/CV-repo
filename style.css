@@ -208,6 +208,7 @@ body {
 /* --- Custom Rocket Cursor --- */
 #rocket-cursor {
   position: fixed;
+  /* width and height will be set dynamically by JS to match image natural size */
   pointer-events: none; /* So it doesn't block clicks */
   z-index: 9999;
   top: 0;
@@ -216,8 +217,8 @@ body {
   transition: transform 0.1s linear, opacity 0.2s;
   user-select: none;
   will-change: transform, left, top, opacity;
-  max-width: 32px;
-  max-height: 32px;
-  width: auto;
-  height: auto;
+  max-width: 32px;    /* Ensures the rocket is never larger than 32px wide */
+  max-height: 32px;   /* Ensures the rocket is never larger than 32px tall */
+  width: auto;        /* Allows proportional scaling */
+  height: auto;       /* Allows proportional scaling */
 }
