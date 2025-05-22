@@ -5,126 +5,14 @@
   <meta charset="UTF-8">
   <title>Interactive Black Hole with Airship</title>
   <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: radial-gradient(ellipse at center, black, #1a1a1a);
-      height: 100vh;
-    }
-    .black-hole-container {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      height: 300px;
-      z-index: 1;
-    }
-    .purple-shadow {
-      position: absolute;
-      top: -75px;
-      left: -75px;
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
-      border-radius: 50%;
-      animation: wave-color-motion 5s infinite ease-in-out;
-    }
-    .black-hole {
-      position: absolute;
-      left: 50px;
-      top: 50px;
-      width: 200px;
-      height: 200px;
-      background: black;
-      border-radius: 50%;
-      box-shadow:
-        0 0 20px 5px pink,
-        0 0 40px 10px purple,
-        0 0 60px 15px blue;
-      animation: neon-glow 3s infinite ease-in-out;
-    }
-    .stars {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .star {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: purple;
-      border-radius: 50%;
-      animation: twinkle 3s infinite ease-in-out;
-    }
-    @keyframes neon-glow {
-      0%, 100% {
-        box-shadow:
-          0 0 20px 5px pink,
-          0 0 40px 10px purple,
-          0 0 60px 15px blue;
-      }
-      50% {
-        box-shadow:
-          0 0 30px 10px pink,
-          0 0 50px 15px purple,
-          0 0 70px 20px blue;
-      }
-    }
-    @keyframes wave-color-motion {
-      0%, 100% {
-        transform: scale(1);
-        background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
-      }
-      50% {
-        transform: scale(1.2);
-        background: radial-gradient(circle, rgba(200, 0, 200, 0.6), transparent 70%);
-      }
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
-    /* Airship sprite styling */
-    #airship {
-      position: absolute;
-      left: 35%;
-      top: 32%;
-      width: 60px;
-      z-index: 2;
-      cursor: pointer;
-      transition: left 1s, top 1s, opacity 0.5s;
-      /* Optionally add drop shadow for visibility */
-      filter: drop-shadow(0 0 8px #fff);
-    }
-    /* Hidden state for airship */
-    #airship.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    /* Overlay for circular reveal transition */
-    #bg-transition {
-      position: fixed;
-      left: 0; top: 0;
-      width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 100;
-      background: url('images/aiblackhole.png') center center / cover no-repeat;
-      clip-path: circle(0% at 50% 50%);
-      transition: clip-path 1s ease, opacity 0.5s 1s;
-      opacity: 1;
-    }
-    #bg-transition.revealed {
-      clip-path: circle(150% at 50% 50%);
-    }
+    /* (You can remove this <style> block if all styles are in style.css) */
   </style>
 </head>
 <body>
-  <!-- Black hole and aura -->
+  <!-- Black hole and Interstellar-style aura and accretion disk -->
   <div class="black-hole-container">
-    <div class="purple-shadow"></div>
+    <div class="aura"></div>
+    <div class="accretion-disk"></div>
     <div class="black-hole"></div>
   </div>
   <!-- Airship sprite (change src path if needed) -->
