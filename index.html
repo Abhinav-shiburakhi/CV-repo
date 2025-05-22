@@ -82,6 +82,10 @@
           document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
           transition.style.opacity = '0';
           document.querySelector('.black-hole-container').classList.add('hidden');
+          // Stop star twinkling
+          document.querySelectorAll('.star').forEach(star => {
+            star.style.animation = 'none';
+          });
         }, 1000);
       }, 1000);
     });
