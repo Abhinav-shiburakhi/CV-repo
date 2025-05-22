@@ -85,23 +85,6 @@ body {
   50% { opacity: 0.2; }
 }
 
-/* Airship sprite styling */
-#airship {
-  position: absolute;
-  left: 38%;
-  top: 32%;
-  width: 60px;
-  z-index: 10;
-  cursor: pointer;
-  transition: left 1s, top 1s, opacity 0.5s;
-  filter: drop-shadow(0 0 8px #fff);
-}
-/* Airship hidden state for fade-out */
-#airship.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
 /* Overlay for circular reveal transition */
 #bg-transition {
   position: fixed;
