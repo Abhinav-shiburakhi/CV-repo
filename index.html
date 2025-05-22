@@ -9,6 +9,23 @@
   </style>
 </head>
 <body>
+  <!-- Hamburger Menu Button and Menu -->
+  <div id="menu-container">
+    <button id="menu-toggle" aria-label="Open Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <nav id="menu" class="menu-hidden">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
   <!-- Black hole and Interstellar-style aura and accretion disk -->
   <div class="black-hole-container">
     <div class="aura"></div>
@@ -32,6 +49,21 @@
       star.style.animationDelay = `${Math.random() * 5}s`;
       starsContainer.appendChild(star);
     }
+
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('menu-hidden');
+      menuToggle.classList.toggle('open');
+    });
+    // Optional: Close menu when clicking a link
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('menu-hidden');
+        menuToggle.classList.remove('open');
+      });
+    });
 
     // Animate airship and change background on click
     const airship = document.getElementById('airship');
