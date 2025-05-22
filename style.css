@@ -16,46 +16,19 @@ body {
   pointer-events: none;
 }
 
-/* Interstellar-style glowing aura: stronger on top */
+/* Blue and purple glowing aura: alternating radially */
 .aura {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 38%, rgba(255, 215, 0, 0.7) 0%, transparent 60%),
-    radial-gradient(circle at 50% 60%, rgba(255, 140, 0, 0.5) 0%, transparent 70%),
-    radial-gradient(circle at 50% 80%, rgba(255, 69, 0, 0.3) 0%, transparent 80%);
+    radial-gradient(circle at 50% 38%, rgba(0, 0, 255, 0.7) 0%, transparent 60%),
+    radial-gradient(circle at 50% 60%, rgba(128, 0, 128, 0.5) 0%, transparent 70%),
+    radial-gradient(circle at 50% 80%, rgba(75, 0, 130, 0.3) 0%, transparent 80%);
   filter: blur(24px);
   animation: aura-pulse 6s ease-in-out infinite;
   z-index: 1;
   pointer-events: none;
-}
-
-/* Accretion disk */
-.accretion-disk {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 280px;
-  height: 60px;
-  margin-left: -140px;
-  margin-top: -30px;
-  border-radius: 50% / 50%;
-  background:
-    conic-gradient(
-      from 0deg,
-      rgba(255, 215, 0, 0.85) 0deg 60deg,
-      rgba(255, 140, 0, 0.75) 60deg 120deg,
-      rgba(255, 69, 0, 0.65) 120deg 180deg,
-      rgba(255, 140, 0, 0.75) 180deg 240deg,
-      rgba(255, 215, 0, 0.85) 240deg 300deg,
-      rgba(255, 215, 0, 0.85) 300deg 360deg
-    );
-  filter: blur(7px) brightness(1.2);
-  animation: rotate-disk 8s linear infinite;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.9;
 }
 
 /* Black hole core */
@@ -68,8 +41,8 @@ body {
   background: black;
   border-radius: 50%;
   box-shadow:
-    0 0 40px 15px rgba(255, 215, 0, 0.5),
-    0 0 80px 30px rgba(255, 140, 0, 0.3);
+    0 0 40px 15px rgba(0, 0, 255, 0.3),
+    0 0 80px 30px rgba(128, 0, 128, 0.2);
   z-index: 3;
 }
 
@@ -85,16 +58,6 @@ body {
   }
 }
 
-/* Accretion disk rotation */
-@keyframes rotate-disk {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .stars {
   position: fixed;
   width: 100vw;
@@ -106,9 +69,9 @@ body {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: purple;
   border-radius: 50%;
   animation: twinkle 3s infinite ease-in-out;
+  /* No background here; color is set in JS */
 }
 @keyframes twinkle {
   0%, 100% { opacity: 1; }
