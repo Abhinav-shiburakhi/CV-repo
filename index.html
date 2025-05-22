@@ -94,13 +94,13 @@
 
     // --- Rocket Cursor Script with auto-sizing, scaling, and disappearing effect ---
     const rocket = document.getElementById('rocket-cursor');
-    let rocketWidth = 48; // fallback default
-    let rocketHeight = 48;
+    let rocketWidth = 32; // fallback default, matches CSS max-width
+    let rocketHeight = 32;
 
-    // Set actual image size once loaded
+    // Set actual image size once loaded, but never exceed 32x32
     function updateRocketSize() {
-      rocketWidth = rocket.naturalWidth || 48;
-      rocketHeight = rocket.naturalHeight || 48;
+      rocketWidth = Math.min(rocket.naturalWidth || 32, 32);
+      rocketHeight = Math.min(rocket.naturalHeight || 32, 32);
       rocket.style.width = rocketWidth + 'px';
       rocket.style.height = rocketHeight + 'px';
     }
@@ -135,9 +135,10 @@
           const scaleFactor = 1 - (effectRadius - distance) / effectRadius;
           const widthScale = minWidthScale + scaleFactor * (1 - minWidthScale);
           const heightScale = maxHeightScale - scaleFactor * (maxHeightScale - 1);
+          // +180 for right-facing sprite
           rocket.style.transform = `rotate(${angle+180}deg) scale(${widthScale}, ${heightScale})`;
         } else {
-          rocket.style.transform = `rotate(${angle}deg) scale(1, 1)`;
+          rocket.style.transform = `rotate(${angle+180}deg) scale(1, 1)`;
         }
       }
     });
