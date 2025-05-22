@@ -208,14 +208,13 @@ body {
 /* --- Custom Rocket Cursor --- */
 #rocket-cursor {
   position: fixed;
-  width: 48px;  /* Adjust to your rocket sprite size */
-  height: 48px;
+  /* width and height will be set dynamically by JS to match image natural size */
   pointer-events: none; /* So it doesn't block clicks */
   z-index: 9999;
   top: 0;
   left: 0;
   transform-origin: 50% 50%;
-  transition: transform 0.1s linear;
+  transition: transform 0.1s linear, opacity 0.2s;
   user-select: none;
-  will-change: transform, left, top;
+  will-change: transform, left, top, opacity;
 }
