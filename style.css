@@ -205,3 +205,44 @@ body {
   width: auto;        /* Allows proportional scaling */
   height: auto;       /* Allows proportional scaling */
 }
+
+/* --- Billboard above black hole --- */
+.billboard-container {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 210px); /* Adjust billboard above black hole */
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none; /* So it doesn't block clicks */
+}
+
+.billboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.billboard-text {
+  font-family: 'Pacifico', 'Brush Script MT', cursive, sans-serif;
+  font-size: 2.5em;
+  color: #fff8e1;
+  text-shadow: 0 2px 16px #7e57c2, 0 0 6px #2196f3;
+  padding: 16px 38px;
+  background: rgba(40, 30, 100, 0.75);
+  border-radius: 22px;
+  border: 3px solid #ffd54f;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.billboard-arrow {
+  width: 0;
+  height: 0;
+  border-left: 22px solid transparent;
+  border-right: 22px solid transparent;
+  border-top: 38px solid #ffd54f;
+  filter: drop-shadow(0 2px 6px #7e57c2);
+  margin-top: -2px;
+  /* Arrow points downward toward black hole */
+}
