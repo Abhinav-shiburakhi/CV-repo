@@ -21,7 +21,6 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  /* Layered gradients: gold, orange, red, stronger on top */
   background:
     radial-gradient(circle at 50% 38%, rgba(255, 215, 0, 0.7) 0%, transparent 60%),
     radial-gradient(circle at 50% 60%, rgba(255, 140, 0, 0.5) 0%, transparent 70%),
@@ -145,4 +144,11 @@ body {
 }
 #bg-transition.revealed {
   clip-path: circle(150% at 50% 50%);
+}
+
+/* Hide black hole container after transition */
+.black-hole-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
 }
