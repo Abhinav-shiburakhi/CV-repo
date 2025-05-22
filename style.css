@@ -83,11 +83,31 @@ body {
 /* Airship sprite styling */
 #airship {
   position: absolute;
-  left: 25%;
-  top: 25%;
+  left: 35%;
+  top: 32%;
   width: 60px;
   z-index: 2;
   cursor: pointer;
-  transition: left 1s, top 1s;
+  transition: left 1s, top 1s, opacity 0.5s;
   filter: drop-shadow(0 0 8px #fff);
+}
+/* Airship hidden state for fade-out */
+#airship.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+/* Overlay for circular reveal transition */
+#bg-transition {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 100;
+  background: url('images/aiblackhole.png') center center / cover no-repeat;
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 1s ease, opacity 0.5s 1s;
+  opacity: 1;
+}
+#bg-transition.revealed {
+  clip-path: circle(150% at 50% 50%);
 }
