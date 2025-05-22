@@ -189,6 +189,27 @@ body {
   color: #222;
 }
 
+/* --- X Button for Sliding Menu --- */
+#menu-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: #ffe082;
+  cursor: pointer;
+  z-index: 2002;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.85;
+  transition: color 0.2s, opacity 0.2s;
+}
+#menu-close:hover {
+  color: #ffd54f;
+  opacity: 1;
+}
+
 /* --- Custom Rocket Cursor --- */
 #rocket-cursor {
   position: fixed;
