@@ -1,43 +1,93 @@
 body {
   margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background-image: url('images/blackholeastro.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  color: #fff;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, black, #1a1a1a);
+  height: 100vh;
 }
-
-.container {
-  background: rgba(0,0,0,0.6);
-  padding: 2em 3em;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 0 16px #000;
+.black-hole-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  z-index: 1;
 }
-
-h1 {
-  margin-bottom: 1.5em;
-  font-size: 2em;
+.purple-shadow {
+  position: absolute;
+  top: -75px;
+  left: -75px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
+  border-radius: 50%;
+  animation: wave-color-motion 5s infinite ease-in-out;
 }
-
-button {
-  padding: 0.7em 2em;
-  font-size: 1.1em;
-  background: #ff9800;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
+.black-hole {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 200px;
+  height: 200px;
+  background: black;
+  border-radius: 50%;
+  box-shadow:
+    0 0 20px 5px pink,
+    0 0 40px 10px purple,
+    0 0 60px 15px blue;
+  animation: neon-glow 3s infinite ease-in-out;
+}
+.stars {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: purple;
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+}
+@keyframes neon-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px 5px pink,
+      0 0 40px 10px purple,
+      0 0 60px 15px blue;
+  }
+  50% {
+    box-shadow:
+      0 0 30px 10px pink,
+      0 0 50px 15px purple,
+      0 0 70px 20px blue;
+  }
+}
+@keyframes wave-color-motion {
+  0%, 100% {
+    transform: scale(1);
+    background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
+  }
+  50% {
+    transform: scale(1.2);
+    background: radial-gradient(circle, rgba(200, 0, 200, 0.6), transparent 70%);
+  }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+/* Airship sprite styling */
+#airship {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  width: 60px;
+  z-index: 2;
   cursor: pointer;
-  transition: background 0.2s;
-}
-
-button:hover {
-  background: #ffc107;
-  color: #222;
+  transition: left 1s, top 1s;
+  filter: drop-shadow(0 0 8px #fff);
 }
