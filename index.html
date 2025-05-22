@@ -12,7 +12,7 @@
   <!-- Menu Sprite Button and Sliding Menu -->
   <div id="menu-container">
     <button id="menu-toggle" aria-label="Open Menu">
-      <img src="images/menusprite.png" alt="Menu" id="menu-sprite" />
+      <img src="images/YOUR_SPRITE.png" alt="Menu" id="menu-sprite" />
     </button>
     <nav id="menu" class="menu-hidden">
       <ul>
@@ -80,9 +80,9 @@
           document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
           transition.style.opacity = '0';
           document.querySelector('.black-hole-container').classList.add('hidden');
-          // Stop star twinkling
+          // Stop star twinkling by removing the class
           document.querySelectorAll('.star').forEach(star => {
-            star.style.animation = 'none';
+            star.classList.remove('star');
           });
         }, 1000);
       }, 1000);
