@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Interactive Black Hole with Airship</title>
   <style>
-    /* (You can remove this <style> block if all styles are in style.css) */
+    /* You can remove this <style> block if all styles are in style.css */
   </style>
 </head>
 <body>
@@ -35,6 +35,10 @@
   <div class="stars"></div>
   <!-- Circular reveal overlay (hidden by default) -->
   <div id="bg-transition"></div>
+
+  <!-- Custom Rocket Cursor -->
+  <img id="rocket-cursor" src="images/menusprite.png" alt="" />
+
   <script>
     // Generate random colored stars
     const starsContainer = document.querySelector('.stars');
@@ -87,6 +91,29 @@
         }, 1000);
       }, 1000);
     });
+
+    // --- Rocket Cursor Script ---
+    const rocket = document.getElementById('rocket-cursor');
+    const rocketSize = 48; // Adjust if your sprite is a different size
+
+    document.addEventListener('mousemove', (e) => {
+      rocket.style.left = (e.clientX - rocketSize / 2) + 'px';
+      rocket.style.top = (e.clientY - rocketSize / 2) + 'px';
+
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const dx = centerX - e.clientX;
+      const dy = centerY - e.clientY;
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+      // If your rocket faces left by default, this is correct.
+      rocket.style.transform = `rotate(${angle}deg)`;
+    });
+
+    // Optional: Hide rocket cursor on touch devices
+    if ('ontouchstart' in window) {
+      rocket.style.display = 'none';
+    }
   </script>
 </body>
 </html>
