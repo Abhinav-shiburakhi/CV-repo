@@ -168,4 +168,26 @@
       const angle = Math.atan2(dy, dx) * 180 / Math.PI;
 
       if (distance < disappearRadius) {
-        rocket.style.opacity =
+        rocket.style.opacity = '0';
+      } else {
+        rocket.style.opacity = '1';
+        if (distance < effectRadius) {
+          // Stretch and thin the rocket as it approaches the center
+          const scaleFactor = 1 - (effectRadius - distance) / effectRadius;
+          const widthScale = minWidthScale + scaleFactor * (1 - minWidthScale);
+          const heightScale = maxHeightScale - scaleFactor * (maxHeightScale - 1);
+          // +180 for right-facing sprite
+          rocket.style.transform = `rotate(${angle+180}deg) scale(${heightScale}, ${widthScale})`;
+        } else {
+          rocket.style.transform = `rotate(${angle+180}deg) scale(1, 1)`;
+        }
+      }
+    });
+
+    // Optional: Hide rocket cursor on touch devices
+    if ('ontouchstart' in window) {
+      rocket.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
