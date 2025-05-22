@@ -26,10 +26,9 @@
     </nav>
   </div>
 
-  <!-- Black hole and Interstellar-style aura and accretion disk -->
+  <!-- Black hole with blue and purple aura -->
   <div class="black-hole-container">
     <div class="aura"></div>
-    <div class="accretion-disk"></div>
     <div class="black-hole"></div>
   </div>
   <!-- Airship sprite (change src path if needed) -->
@@ -39,14 +38,17 @@
   <!-- Circular reveal overlay (hidden by default) -->
   <div id="bg-transition"></div>
   <script>
-    // Generate random stars
+    // Generate random colored stars
     const starsContainer = document.querySelector('.stars');
+    const starColors = ['white', 'blue', 'red', 'orange', 'purple'];
     for (let i = 0; i < 200; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
       star.style.left = `${Math.random() * 100}vw`;
       star.style.top = `${Math.random() * 100}vh`;
       star.style.animationDelay = `${Math.random() * 5}s`;
+      // Assign a random color from the starColors array
+      star.style.background = starColors[Math.floor(Math.random() * starColors.length)];
       starsContainer.appendChild(star);
     }
 
@@ -68,24 +70,18 @@
     // Animate airship and change background on click
     const airship = document.getElementById('airship');
     airship.addEventListener('click', () => {
-      // Move airship closer to center
       airship.style.left = '45%';
       airship.style.top = '45%';
-
-      // After airship moves, start the circular reveal
       setTimeout(() => {
         const transition = document.getElementById('bg-transition');
         transition.classList.add('revealed');
-        airship.classList.add('hidden'); // Hide the airship with a fade out
-
-        // After the reveal animation, set the body background and hide the overlay and black hole
+        airship.classList.add('hidden');
         setTimeout(() => {
           document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
           transition.style.opacity = '0';
-          // Hide the black hole container
           document.querySelector('.black-hole-container').classList.add('hidden');
-        }, 1000); // 1000ms matches the transition duration
-      }, 1000); // matches the CSS transition duration for airship movement
+        }, 1000);
+      }, 1000);
     });
   </script>
 </body>
