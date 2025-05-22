@@ -1,9 +1,16 @@
+/* Global box-sizing for easier sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   overflow: hidden;
   background: radial-gradient(ellipse at center, black, #1a1a1a);
   height: 100vh;
+  cursor: none; /* Hide default cursor */
 }
+
 .black-hole-container {
   position: absolute;
   left: 50%;
@@ -77,6 +84,7 @@ body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.2; }
 }
+
 /* Airship sprite styling */
 #airship {
   position: absolute;
@@ -93,6 +101,7 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+
 /* Overlay for circular reveal transition */
 #bg-transition {
   position: fixed;
@@ -194,4 +203,19 @@ body {
 #menu a:hover {
   background: #ffd54f;
   color: #222;
+}
+
+/* --- Custom Rocket Cursor --- */
+#rocket-cursor {
+  position: fixed;
+  width: 48px;  /* Adjust to your rocket sprite size */
+  height: 48px;
+  pointer-events: none; /* So it doesn't block clicks */
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  transform-origin: 50% 50%;
+  transition: transform 0.1s linear;
+  user-select: none;
+  will-change: transform, left, top;
 }
