@@ -51,6 +51,7 @@ body {
     0 0 40px 15px rgba(0, 0, 255, 0.3),
     0 0 80px 30px rgba(128, 0, 128, 0.2);
   z-index: 3;
+  pointer-events: auto; /* <-- THIS LINE FIXES THE CLICK */
 }
 
 /* Aura pulse animation */
