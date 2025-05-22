@@ -14,6 +14,13 @@
       transform: translateX(-50%);
       z-index: 10;
       pointer-events: none; /* So it doesn't block clicks */
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+    .billboard-container.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s;
     }
     .billboard {
       display: flex;
@@ -123,6 +130,7 @@
       const transition = document.getElementById('bg-transition');
       transition.classList.add('revealed');
       document.querySelector('.black-hole-container').classList.add('hidden');
+      document.querySelector('.billboard-container').classList.add('hidden'); // Hide billboard
       setTimeout(() => {
         document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
         transition.style.opacity = '0';
