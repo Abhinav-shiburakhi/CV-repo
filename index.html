@@ -95,9 +95,14 @@
       width: 60px;
       z-index: 2;
       cursor: pointer;
-      transition: left 1s, top 1s;
+      transition: left 1s, top 1s, opacity 0.5s;
       /* Optionally add drop shadow for visibility */
       filter: drop-shadow(0 0 8px #fff);
+    }
+    /* Hidden state for airship */
+    #airship.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -130,10 +135,10 @@
       airship.style.left = '45%';
       airship.style.top = '45%';
 
-      // Change background after animation
+      // Change background after animation and hide airship
       setTimeout(() => {
         document.body.style.background = 'radial-gradient(circle at center, #222, #000 90%)';
-        // Optionally, you can also change black hole or add more effects here
+        airship.classList.add('hidden'); // Hide the airship with a fade out
       }, 1000); // matches the CSS transition duration
     });
   </script>
