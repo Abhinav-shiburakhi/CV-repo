@@ -9,12 +9,10 @@
   </style>
 </head>
 <body>
-  <!-- Hamburger Menu Button and Menu -->
+  <!-- Menu Sprite Button and Sliding Menu -->
   <div id="menu-container">
     <button id="menu-toggle" aria-label="Open Menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+      <img src="images/YOUR_SPRITE.png" alt="Menu" id="menu-sprite" />
     </button>
     <nav id="menu" class="menu-hidden">
       <ul>
@@ -52,7 +50,7 @@
       starsContainer.appendChild(star);
     }
 
-    // Hamburger menu toggle (sliding menu)
+    // Menu toggle (sliding menu)
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
     menuToggle.addEventListener('click', () => {
