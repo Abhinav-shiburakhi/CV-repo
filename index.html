@@ -60,7 +60,7 @@
         0 0 40px 15px rgba(0, 0, 255, 0.3),
         0 0 80px 30px rgba(128, 0, 128, 0.2);
       z-index: 3;
-      pointer-events: auto; /* <-- THIS LINE FIXES THE CLICK */
+      pointer-events: auto;
     }
 
     @keyframes aura-pulse {
@@ -93,7 +93,7 @@
       50% { opacity: 0.2; }
     }
 
-    /* Overlay for circular reveal transition */
+    /* Overlay for circular reveal transition (no video here!) */
     #bg-transition {
       position: fixed;
       left: 0; top: 0;
@@ -109,23 +109,28 @@
     #bg-transition.revealed {
       clip-path: circle(150% at 50% 50%);
     }
-    #bg-transition video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: 1;
-      opacity: 1;
-      pointer-events: none;
-      transition: opacity 1s;
-    }
 
     /* Hide black hole container after transition */
     .black-hole-container.hidden {
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.5s;
+    }
+
+    /* --- Video background for post-transition (NOT inside #bg-transition) --- */
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s;
+    }
+    #bg-video.visible {
+      opacity: 1;
     }
 
     /* --- Sliding Menu with Sprite Button --- */
@@ -351,12 +356,13 @@
   <!-- Star field -->
   <div class="stars"></div>
   
-  <!-- Circular reveal overlay with video background -->
-  <div id="bg-transition">
-    <video id="bg-video" autoplay loop muted playsinline>
-      <source src="images/whiteloop.mp4" type="video/mp4">
-    </video>
-  </div>
+  <!-- Circular reveal overlay (no video inside) -->
+  <div id="bg-transition"></div>
+
+  <!-- Fullscreen Video Background (hidden until transition is over) -->
+  <video id="bg-video" autoplay loop muted playsinline>
+    <source src="images/whiteloop.mp4" type="video/mp4">
+  </video>
 
   <!-- Custom Rocket Cursor -->
   <img id="rocket-cursor" src="images/menusprite.png" alt="" />
@@ -422,6 +428,7 @@
     // Black hole transition trigger
     const blackHole = document.querySelector('.black-hole');
     const transition = document.getElementById('bg-transition');
+    const bgVideo = document.getElementById('bg-video');
     const enterText = document.getElementById('enter-text');
     const rocket = document.getElementById('rocket-cursor');
     blackHole.addEventListener('click', () => {
@@ -430,8 +437,8 @@
       document.querySelector('.billboard-container').classList.add('hidden');
       enterText.style.display = "none";
       setTimeout(() => {
-        // DO NOT fade out the overlay!
-        // transition.style.opacity = '0';
+        // Fade in the video background
+        bgVideo.classList.add('visible');
         document.body.style.cursor = "auto";
         rocket.style.display = "none";
         document.querySelectorAll('.star').forEach(star => {
