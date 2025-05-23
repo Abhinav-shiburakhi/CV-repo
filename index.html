@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
   <style>
-    /* --- Menu Rocket Slide and Rotation --- */
     #menu-toggle {
       background: rgba(30,30,30,0.7);
       border: none;
@@ -29,8 +28,8 @@
       right: 120px;
       background: rgba(40,40,40,0.85);
     }
-    #menu-toggle.menu-closing {
-      right: 120px;
+    #menu-toggle.menu-rotating {
+      right: 32px;
     }
     #menu-sprite {
       width: 32px;
@@ -44,8 +43,11 @@
     #menu-toggle.menu-closing #menu-sprite {
       transform: rotate(180deg);
     }
+    #menu-toggle.menu-rotating #menu-sprite {
+      transform: rotate(180deg);
+    }
     #menu-toggle.menu-open #menu-sprite,
-    #menu-toggle:not(.menu-open):not(.menu-closing) #menu-sprite {
+    #menu-toggle:not(.menu-open):not(.menu-closing):not(.menu-rotating) #menu-sprite {
       transform: rotate(0deg);
     }
     #menu-container {
@@ -103,9 +105,8 @@
       color: #222;
     }
     #menu-close { display: none !important; }
-    /* --- End Menu Rocket Slide and Rotation --- */
 
-    /* --- Billboard above black hole --- */
+    /* Billboard, black hole, rocket cursor, etc. (unchanged from your previous code) */
     .billboard-container {
       position: absolute;
       left: 50%;
@@ -172,7 +173,6 @@
     #enter-text.visible {
       opacity: 1;
     }
-    /* --- Black hole, stars, overlay, and rocket cursor (unchanged from previous code) --- */
     body {
       margin: 0;
       overflow: hidden;
@@ -347,21 +347,27 @@
       menu.classList.remove('menu-hidden');
       menuToggle.classList.add('menu-open');
       menuToggle.classList.remove('menu-closing');
+      menuToggle.classList.remove('menu-rotating');
       menuOpen = true;
       menuAnimating = false;
     }
 
     function closeMenu() {
-      menuToggle.classList.remove('menu-open');
+      // Start rotation immediately
       menuToggle.classList.add('menu-closing');
+      menuToggle.classList.remove('menu-open');
       menu.classList.remove('menu-shown');
       menu.classList.add('menu-hidden');
       menuOpen = false;
       menuAnimating = true;
       setTimeout(() => {
         menuToggle.classList.remove('menu-closing');
-        menuAnimating = false;
-      }, 350); // Match the menu transition duration
+        menuToggle.classList.add('menu-rotating');
+        setTimeout(() => {
+          menuToggle.classList.remove('menu-rotating');
+          menuAnimating = false;
+        }, 350);
+      }, 350); // Wait for slide to finish before rotating back
     }
 
     menuToggle.addEventListener('click', () => {
