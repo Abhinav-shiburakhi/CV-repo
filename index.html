@@ -659,7 +659,7 @@ for t in T:#monte carlo for each temperature
             maglist.append(mag)
         if k%100==0:
             progress+=100
-            print(f"\r{progress*100/(w*100*N):.{a}f} % completed ",end='\r',flush=True)
+            #print(f"'\r'{progress*100/(w*100*N):.{a}f} % completed ",end='\r',flush=True)#remove the comment to show the working progress
             time.sleep(0.000000000000000000000001)
     m=np.mean(maglist)
     m2=np.mean(np.array(maglist)**2)
