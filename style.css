@@ -349,3 +349,32 @@ body {
 #main-content a:hover {
   color: #ffd54f;
 }
+
+/* --- Academics Section (NEW) --- */
+#academics {
+  /* Inherits main section styles, but you can add a subtle accent */
+  border-left: 6px solid #ffd54f;
+  background: linear-gradient(120deg, rgba(20,20,40,0.65) 60%, rgba(50,50,90,0.45) 100%);
+}
+#academics h1 {
+  color: #ffd54f;
+}
+#academics ul {
+  margin-left: 0.5em;
+  padding-left: 1.2em;
+}
+#academics li {
+  font-size: 1.18em;
+  margin-bottom: 0.7em;
+  list-style: disc inside;
+}
+#academics a {
+  color: #90caf9;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+#academics a:hover {
+  color: #ffd54f;
+  text-shadow: 0 0 5px #fffde7;
+}
