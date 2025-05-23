@@ -51,7 +51,7 @@ body {
     0 0 40px 15px rgba(0, 0, 255, 0.3),
     0 0 80px 30px rgba(128, 0, 128, 0.2);
   z-index: 3;
-  pointer-events: auto; /* <-- THIS LINE FIXES THE CLICK */
+  pointer-events: auto;
 }
 
 /* Aura pulse animation */
@@ -79,7 +79,6 @@ body {
   height: 4px;
   border-radius: 50%;
   animation: twinkle 3s infinite ease-in-out;
-  /* No background here; color is set in JS */
 }
 @keyframes twinkle {
   0%, 100% { opacity: 1; }
@@ -94,11 +93,24 @@ body {
   pointer-events: none;
   z-index: 100;
   clip-path: circle(0% at 50% 50%);
-  transition: clip-path 1s ease, opacity 0.5s 1s;
+  transition: clip-path 1s ease;
   opacity: 1;
+  overflow: hidden;
+  background: none;
 }
 #bg-transition.revealed {
   clip-path: circle(150% at 50% 50%);
+}
+#bg-transition video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 1s;
 }
 
 /* Hide black hole container after transition */
@@ -115,7 +127,6 @@ body {
   right: 32px;
   z-index: 2000;
 }
-/* --- Rocket as menu toggle, slides with menu --- */
 #menu-toggle {
   background: rgba(30,30,30,0.7);
   border: none;
@@ -134,7 +145,7 @@ body {
   right: 32px;
 }
 #menu-toggle.menu-open {
-  right: 274px; /* Move rocket into the menu panel. Adjust as needed. */
+  right: 274px;
   background: rgba(40,40,40,0.85);
 }
 #menu-toggle #menu-sprite {
@@ -295,21 +306,5 @@ body {
   user-select: none;
 }
 #enter-text.visible {
-  opacity: 1;
-}
-
-/* --- Video background for post-transition --- */
-#bg-video {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s;
-}
-#bg-video.visible {
   opacity: 1;
 }
