@@ -134,7 +134,7 @@ body {
   right: 32px;
 }
 #menu-toggle.menu-open {
-  right: 200px; /* Move rocket into the menu panel. Adjust as needed. */
+  right: 274px; /* Move rocket into the menu panel. Adjust as needed. */
   background: rgba(40,40,40,0.85);
 }
 #menu-toggle #menu-sprite {
