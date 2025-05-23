@@ -315,7 +315,7 @@ body {
   display: none;
   position: relative;
   z-index: 110;
-  color: #fff;
+  color: #000000;
   padding: 48px 32px;
   font-family: 'Oswald', sans-serif;
 }
