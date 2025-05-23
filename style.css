@@ -309,3 +309,43 @@ body {
 #enter-text.visible {
   opacity: 1;
 }
+
+/* --- Main content (post-transition) --- */
+#main-content {
+  display: none;
+  position: relative;
+  z-index: 110;
+  color: #fff;
+  padding: 48px 32px;
+  font-family: 'Oswald', sans-serif;
+}
+#main-content section {
+  margin-bottom: 48px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 700px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+}
+#main-content h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.2em;
+  margin-bottom: 12px;
+  color: #ffe082;
+}
+#main-content p, #main-content li {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.3em;
+  color: #fff;
+}
+#main-content ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+#main-content a {
+  color: #90caf9;
+  text-decoration: underline;
+}
+#main-content a:hover {
+  color: #ffd54f;
+}
