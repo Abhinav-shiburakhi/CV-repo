@@ -336,7 +336,7 @@ body {
 #main-content p, #main-content li {
   font-family: serif, sans-serif;
   font-size: 1.3em;
-  color: #fff;
+  color: #000;
 }
 #main-content ul {
   margin-top: 0.5em;
