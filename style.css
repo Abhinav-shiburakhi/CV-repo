@@ -138,10 +138,7 @@ body {
   right: 120px; /* Move rocket into the menu panel. Adjust as needed. */
   background: rgba(40,40,40,0.85);
 }
-#menu-toggle.menu-closing {
-  right: 120px;
-}
-#menu-sprite {
+#menu-toggle #menu-sprite {
   width: 32px;
   height: 32px;
   object-fit: contain;
@@ -150,12 +147,8 @@ body {
   filter: drop-shadow(0 0 8px #ffe082);
   transform: rotate(0deg);
 }
-#menu-toggle.menu-closing #menu-sprite {
+#menu-toggle.rotated #menu-sprite {
   transform: rotate(180deg);
-}
-#menu-toggle.menu-open #menu-sprite,
-#menu-toggle:not(.menu-open):not(.menu-closing) #menu-sprite {
-  transform: rotate(0deg);
 }
 
 /* --- Menu background image and Caveat font --- */
