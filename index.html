@@ -4,10 +4,108 @@
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <title>Interactive Black Hole with Billboard</title>
-  <!-- Fancy font for the billboard -->
   <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
   <style>
+    /* --- Menu Rocket Slide and Rotation --- */
+    #menu-toggle {
+      background: rgba(30,30,30,0.7);
+      border: none;
+      border-radius: 8px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 2001;
+      transition: right 0.35s cubic-bezier(.77,0,.18,1), background 0.2s;
+      padding: 0;
+      position: fixed;
+      top: 24px;
+      right: 32px;
+    }
+    #menu-toggle.menu-open {
+      right: 120px;
+      background: rgba(40,40,40,0.85);
+    }
+    #menu-toggle.menu-closing {
+      right: 120px;
+    }
+    #menu-sprite {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      pointer-events: none;
+      transition: filter 0.2s, transform 0.35s cubic-bezier(.77,0,.18,1);
+      filter: drop-shadow(0 0 8px #ffe082);
+      transform: rotate(0deg);
+    }
+    #menu-toggle.menu-closing #menu-sprite {
+      transform: rotate(180deg);
+    }
+    #menu-toggle.menu-open #menu-sprite,
+    #menu-toggle:not(.menu-open):not(.menu-closing) #menu-sprite {
+      transform: rotate(0deg);
+    }
+    #menu-container {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+      z-index: 2000;
+    }
+    #menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 240px;
+      background: rgba(20,20,20,0.98);
+      border-radius: 0 0 0 16px;
+      box-shadow: -4px 0 32px rgba(0,0,0,0.3);
+      padding: 48px 0 0 0;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(.77,0,.18,1), opacity 0.2s;
+      opacity: 1;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    #menu.menu-shown {
+      transform: translateX(0);
+    }
+    #menu.menu-hidden {
+      pointer-events: none;
+      opacity: 0.98;
+    }
+    #menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+    #menu li {
+      margin: 0;
+      padding: 0;
+    }
+    #menu a {
+      display: block;
+      color: #ffe082;
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 18px 32px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    #menu a:hover {
+      background: #ffd54f;
+      color: #222;
+    }
+    #menu-close { display: none !important; }
+    /* --- End Menu Rocket Slide and Rotation --- */
+
+    /* --- Billboard above black hole --- */
     .billboard-container {
       position: absolute;
       left: 50%;
@@ -74,25 +172,113 @@
     #enter-text.visible {
       opacity: 1;
     }
-    /* X button for closing menu */
-    #menu-close {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      background: none;
-      border: none;
-      font-size: 2em;
-      color: #ffe082;
-      cursor: pointer;
-      z-index: 2002;
-      padding: 0;
-      line-height: 1;
-      opacity: 0.85;
-      transition: color 0.2s, opacity 0.2s;
+    /* --- Black hole, stars, overlay, and rocket cursor (unchanged from previous code) --- */
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, black, #1a1a1a);
+      height: 100vh;
+      cursor: none;
     }
-    #menu-close:hover {
-      color: #ffd54f;
+    .black-hole-container {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      z-index: 1;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .aura {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(0, 0, 255, 0.7) 0%, transparent 60%),
+        radial-gradient(circle at 50% 60%, rgba(128, 0, 128, 0.5) 0%, transparent 70%),
+        radial-gradient(circle at 50% 80%, rgba(75, 0, 130, 0.3) 0%, transparent 80%);
+      filter: blur(24px);
+      animation: aura-pulse 6s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .black-hole {
+      position: absolute;
+      left: 50px;
+      top: 50px;
+      width: 200px;
+      height: 200px;
+      background: black;
+      border-radius: 50%;
+      box-shadow:
+        0 0 40px 15px rgba(0, 0, 255, 0.3),
+        0 0 80px 30px rgba(128, 0, 128, 0.2);
+      z-index: 3;
+      pointer-events: auto;
+    }
+    @keyframes aura-pulse {
+      0%, 100% {
+        filter: blur(22px);
+        opacity: 0.85;
+      }
+      50% {
+        filter: blur(28px);
+        opacity: 1;
+      }
+    }
+    .stars {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    #bg-transition {
+      position: fixed;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+      background: url('images/aiblackhole.png') center center / cover no-repeat;
+      clip-path: circle(0% at 50% 50%);
+      transition: clip-path 1s ease, opacity 0.5s 1s;
       opacity: 1;
+    }
+    #bg-transition.revealed {
+      clip-path: circle(150% at 50% 50%);
+    }
+    .black-hole-container.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    #rocket-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      transform-origin: 50% 50%;
+      transition: transform 0.1s linear, opacity 0.2s;
+      user-select: none;
+      will-change: transform, left, top, opacity;
+      max-width: 32px;
+      max-height: 32px;
+      width: auto;
+      height: auto;
     }
   </style>
 </head>
@@ -103,7 +289,6 @@
       <img src="images/menusprite.png" alt="Menu" id="menu-sprite" />
     </button>
     <nav id="menu" class="menu-hidden">
-      <button id="menu-close" aria-label="Close Menu">&times;</button>
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#projects">Projects</a></li>
@@ -147,33 +332,53 @@
       star.style.left = `${Math.random() * 100}vw`;
       star.style.top = `${Math.random() * 100}vh`;
       star.style.animationDelay = `${Math.random() * 5}s`;
-      // Assign a random color from the starColors array
       star.style.background = starColors[Math.floor(Math.random() * starColors.length)];
       starsContainer.appendChild(star);
     }
 
-    // Menu toggle (sliding menu)
+    // Menu toggle (sliding menu) and rocket integration with rotation
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
+    let menuOpen = false;
+    let menuAnimating = false;
+
+    function openMenu() {
+      menu.classList.add('menu-shown');
+      menu.classList.remove('menu-hidden');
+      menuToggle.classList.add('menu-open');
+      menuToggle.classList.remove('menu-closing');
+      menuOpen = true;
+      menuAnimating = false;
+    }
+
+    function closeMenu() {
+      menuToggle.classList.remove('menu-open');
+      menuToggle.classList.add('menu-closing');
+      menu.classList.remove('menu-shown');
+      menu.classList.add('menu-hidden');
+      menuOpen = false;
+      menuAnimating = true;
+      setTimeout(() => {
+        menuToggle.classList.remove('menu-closing');
+        menuAnimating = false;
+      }, 350); // Match the menu transition duration
+    }
+
     menuToggle.addEventListener('click', () => {
-      menu.classList.toggle('menu-shown');
-      menu.classList.toggle('menu-hidden');
-      menuToggle.classList.toggle('open');
+      if (!menuOpen && !menuAnimating) {
+        openMenu();
+      } else if (menuOpen && !menuAnimating) {
+        closeMenu();
+      }
     });
+
     // Optional: Close menu when clicking a link
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        menu.classList.remove('menu-shown');
-        menu.classList.add('menu-hidden');
-        menuToggle.classList.remove('open');
+        if (menuOpen && !menuAnimating) {
+          closeMenu();
+        }
       });
-    });
-    // X button to close menu
-    const menuClose = document.getElementById('menu-close');
-    menuClose.addEventListener('click', () => {
-      menu.classList.remove('menu-shown');
-      menu.classList.add('menu-hidden');
-      menuToggle.classList.remove('open');
     });
 
     // --- Black hole transition trigger ---
@@ -184,15 +389,13 @@
       const transition = document.getElementById('bg-transition');
       transition.classList.add('revealed');
       document.querySelector('.black-hole-container').classList.add('hidden');
-      document.querySelector('.billboard-container').classList.add('hidden'); // Hide billboard
-      enterText.style.display = "none"; // Hide ENTER forever after transition
+      document.querySelector('.billboard-container').classList.add('hidden');
+      enterText.style.display = "none";
       setTimeout(() => {
         document.body.style.background = 'url("images/aiblackhole.png") center center / cover no-repeat';
         transition.style.opacity = '0';
-        // Restore default cursor and hide rocket cursor
         document.body.style.cursor = "auto";
         rocket.style.display = "none";
-        // Stop star twinkling by removing the class
         document.querySelectorAll('.star').forEach(star => {
           star.classList.remove('star');
         });
@@ -200,10 +403,9 @@
     });
 
     // --- Rocket Cursor Script with auto-sizing, scaling, and disappearing effect ---
-    let rocketWidth = 32; // fallback default, matches CSS max-width
+    let rocketWidth = 32;
     let rocketHeight = 32;
 
-    // Set actual image size once loaded, but never exceed 32x32
     function updateRocketSize() {
       rocketWidth = Math.min(rocket.naturalWidth || 32, 32);
       rocketHeight = Math.min(rocket.naturalHeight || 32, 32);
@@ -213,14 +415,12 @@
     rocket.onload = updateRocketSize;
     if (rocket.complete) updateRocketSize();
 
-    // Effect parameters
-    const effectRadius = 150; // px, where stretching starts
+    const effectRadius = 150;
     const minWidthScale = 0.3;
     const maxHeightScale = 2.5;
-    const disappearRadius = 20; // px, where rocket disappears
+    const disappearRadius = 20;
 
     document.addEventListener('mousemove', (e) => {
-      // Always use current rocketWidth for positioning
       rocket.style.left = (e.clientX - rocketWidth / 2) + 'px';
       rocket.style.top = (e.clientY - rocketHeight / 2) + 'px';
 
@@ -232,7 +432,6 @@
 
       const angle = Math.atan2(dy, dx) * 180 / Math.PI;
 
-      // Only show ENTER if it hasn't been hidden forever
       if (enterText.style.display !== "none") {
         if (distance < disappearRadius) {
           rocket.style.opacity = '0';
@@ -241,11 +440,9 @@
           rocket.style.opacity = '1';
           enterText.classList.remove('visible');
           if (distance < effectRadius) {
-            // Stretch and thin the rocket as it approaches the center
             const scaleFactor = 1 - (effectRadius - distance) / effectRadius;
             const widthScale = minWidthScale + scaleFactor * (1 - minWidthScale);
             const heightScale = maxHeightScale - scaleFactor * (maxHeightScale - 1);
-            // +180 for right-facing sprite
             rocket.style.transform = `rotate(${angle+180}deg) scale(${heightScale}, ${widthScale})`;
           } else {
             rocket.style.transform = `rotate(${angle+180}deg) scale(1, 1)`;
@@ -254,7 +451,6 @@
       }
     });
 
-    // Optional: Hide rocket cursor on touch devices
     if ('ontouchstart' in window) {
       rocket.style.display = 'none';
     }
