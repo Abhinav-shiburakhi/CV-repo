@@ -139,7 +139,6 @@ body {
   background: rgba(40,40,40,0.85);
 }
 #menu-toggle.menu-closing {
-  /* stays at right: 120px during closing animation */
   right: 120px;
 }
 #menu-sprite {
@@ -151,7 +150,6 @@ body {
   filter: drop-shadow(0 0 8px #ffe082);
   transform: rotate(0deg);
 }
-/* Rocket rotation for menu closing */
 #menu-toggle.menu-closing #menu-sprite {
   transform: rotate(180deg);
 }
@@ -160,13 +158,14 @@ body {
   transform: rotate(0deg);
 }
 
+/* --- Menu background image and Caveat font --- */
 #menu {
   position: fixed;
   top: 0;
   right: 0;
   height: 100vh;
   width: 240px;
-  background: rgba(20,20,20,0.98);
+  background: url('myphoto.jpg') center center / cover no-repeat, rgba(20,20,20,0.98);
   border-radius: 0 0 0 16px;
   box-shadow: -4px 0 32px rgba(0,0,0,0.3);
   padding: 48px 0 0 0;
@@ -177,6 +176,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-family: 'Caveat', cursive !important;
+}
+#menu ul,
+#menu li,
+#menu a {
+  font-family: 'Caveat', cursive !important;
+  font-size: 1.6em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 #menu.menu-shown {
   transform: translateX(0);
@@ -199,7 +207,6 @@ body {
   display: block;
   color: #ffe082;
   text-decoration: none;
-  font-size: 1.1em;
   padding: 18px 32px;
   border-radius: 6px;
   transition: background 0.2s, color 0.2s;
@@ -215,8 +222,7 @@ body {
 /* --- Custom Rocket Cursor --- */
 #rocket-cursor {
   position: fixed;
-  /* width and height will be set dynamically by JS to match image natural size */
-  pointer-events: none; /* So it doesn't block clicks */
+  pointer-events: none;
   z-index: 9999;
   top: 0;
   left: 0;
@@ -224,20 +230,20 @@ body {
   transition: transform 0.1s linear, opacity 0.2s;
   user-select: none;
   will-change: transform, left, top, opacity;
-  max-width: 32px;    /* Ensures the rocket is never larger than 32px wide */
-  max-height: 32px;   /* Ensures the rocket is never larger than 32px tall */
-  width: auto;        /* Allows proportional scaling */
-  height: auto;       /* Allows proportional scaling */
+  max-width: 32px;
+  max-height: 32px;
+  width: auto;
+  height: auto;
 }
 
 /* --- Billboard above black hole --- */
 .billboard-container {
   position: absolute;
   left: 50%;
-  top: calc(50% - 210px); /* Adjust billboard above black hole */
+  top: calc(50% - 210px);
   transform: translateX(-50%);
   z-index: 10;
-  pointer-events: none; /* So it doesn't block clicks */
+  pointer-events: none;
   opacity: 1;
   transition: opacity 0.5s;
 }
@@ -275,7 +281,6 @@ body {
   border-top: 38px solid #ffd54f;
   filter: drop-shadow(0 2px 6px #7e57c2);
   margin-top: -2px;
-  /* Arrow points downward toward black hole */
 }
 
 /* --- ENTER text in the center when rocket vanishes --- */
