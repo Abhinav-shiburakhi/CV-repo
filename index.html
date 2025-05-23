@@ -25,10 +25,11 @@
       right: 32px;
     }
     #menu-toggle.menu-open {
-      right: 120px;
+      right: 272px; /* 240px menu + 32px gap */
       background: rgba(40,40,40,0.85);
     }
     #menu-toggle.menu-rotating {
+      /* stays docked just outside the menu while rotating */
       right: 32px;
     }
     #menu-sprite {
@@ -40,14 +41,11 @@
       filter: drop-shadow(0 0 8px #ffe082);
       transform: rotate(0deg);
     }
-    #menu-toggle.menu-closing #menu-sprite {
-      transform: rotate(180deg);
-    }
     #menu-toggle.menu-rotating #menu-sprite {
       transform: rotate(180deg);
     }
     #menu-toggle.menu-open #menu-sprite,
-    #menu-toggle:not(.menu-open):not(.menu-closing):not(.menu-rotating) #menu-sprite {
+    #menu-toggle:not(.menu-open):not(.menu-rotating) #menu-sprite {
       transform: rotate(0deg);
     }
     #menu-container {
@@ -346,7 +344,6 @@
       menu.classList.add('menu-shown');
       menu.classList.remove('menu-hidden');
       menuToggle.classList.add('menu-open');
-      menuToggle.classList.remove('menu-closing');
       menuToggle.classList.remove('menu-rotating');
       menuOpen = true;
       menuAnimating = false;
@@ -354,20 +351,17 @@
 
     function closeMenu() {
       // Start rotation immediately
-      menuToggle.classList.add('menu-closing');
+      menuToggle.classList.add('menu-rotating');
       menuToggle.classList.remove('menu-open');
       menu.classList.remove('menu-shown');
       menu.classList.add('menu-hidden');
       menuOpen = false;
       menuAnimating = true;
+      // After slide transition, rotate back
       setTimeout(() => {
-        menuToggle.classList.remove('menu-closing');
-        menuToggle.classList.add('menu-rotating');
-        setTimeout(() => {
-          menuToggle.classList.remove('menu-rotating');
-          menuAnimating = false;
-        }, 350);
-      }, 350); // Wait for slide to finish before rotating back
+        menuToggle.classList.remove('menu-rotating');
+        menuAnimating = false;
+      }, 350); // Match the menu slide transition duration
     }
 
     menuToggle.addEventListener('click', () => {
