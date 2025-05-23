@@ -305,3 +305,19 @@ body {
 #enter-text.visible {
   opacity: 1;
 }
+
+/* --- Video background for post-transition --- */
+#bg-video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s;
+}
+#bg-video.visible {
+  opacity: 1;
+}
